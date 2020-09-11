@@ -20,7 +20,13 @@ router.get("/", async (req, res, next) => {
 // GET /characters/:id - get character by id
 router.get("/:id", async (req, res, next) => {
     try {
-        res.json(await Characters.findById(req.params.id))
+        const character = await Characters.findById(req.params.id)
+        if (!character) {
+            res.status(404).json({
+                message: "User not found"
+            })
+        }
+        res.json(character)
     } catch (err) {
         next(err)
     }

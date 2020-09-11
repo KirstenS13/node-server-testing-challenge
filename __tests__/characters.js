@@ -37,7 +37,6 @@ describe("characters integrations tests", () => {
     it("GET /characters/:id", async () => {
         // get request to /characters/:id path with supertest
         const res = await supertest(server).get("/characters/1")
-        console.log(res.body)
         // make assertions
         // correct status code?
         expect(res.statusCode).toBe(200)
@@ -46,11 +45,17 @@ describe("characters integrations tests", () => {
         // correct data?
         expect(res.body.name).toBe("luna lovegood")
     })
+
+    // get character by id - not found
+    it("GET /characters/:id", async () => {
+        // get request to /characters/:id path with supertest
+        const res = await supertest(server).get("/characters/8")
+        console.log(res.body)
+        // make assertions
+        // correct status code?
+        expect(res.statusCode).toBe(404)
+    })
 })
-
-
-
-// get character by id - not found
 
 // create character
 
