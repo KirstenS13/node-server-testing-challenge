@@ -4,7 +4,7 @@ const charactersRouter = require("./characters/characters-router")
 const server = express()
 
 server.use(express.json())
-server.use(charactersRouter)
+server.use("/characters", charactersRouter)
 
 server.get("/", (req, res) => {
     res.json({
