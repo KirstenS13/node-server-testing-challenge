@@ -100,6 +100,13 @@ describe("characters integrations tests", () => {
         // correct status code?
         expect(res.statusCode).toBe(204)
     })
-})
 
-// delete character - not found
+    // delete character - not found
+    it("GET /characters/:id", async () => {
+        // get request to /characters/:id path with supertest
+        const res = await supertest(server).del("/characters/9")
+        // make assertions
+        // correct status code?
+        expect(res.statusCode).toBe(404)
+    })
+})

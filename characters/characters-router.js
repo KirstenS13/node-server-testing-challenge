@@ -23,7 +23,7 @@ router.get("/:id", async (req, res, next) => {
         const character = await Characters.findById(req.params.id)
         if (!character) {
             res.status(404).json({
-                message: "User not found"
+                message: "Character not found"
             })
         }
         res.json(character)
@@ -51,8 +51,18 @@ router.post("/", async (req, res, next) => {
 // DELETE /characters/:id - delete character
 router.delete("/:id", async (req, res, next) => {
     try {
+        const character = await Characters.findById(req.params.id)
+        if (!character) {
+            return res.status(404).json({
+                message: "Character not found"
+            })
+        }
         const response = await Characters.remove(req.params.id)
-        console.log(response)
+        if (!response) {
+            return res.status(500).json({
+                message: "Character was not deleted"
+            })
+        }
         res.status(204).end()
     } catch (err) {
         next(err)
