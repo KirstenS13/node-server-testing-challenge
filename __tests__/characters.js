@@ -69,9 +69,29 @@ describe("characters integrations tests", () => {
         // correct data?
         expect(res.body.name).toBe("faramir")
     })
-})
 
-// create character - bad request (no data)
+    // create character - bad request (no data)
+    it("POST /characters", async () => {
+        // post request to /characters path with supertest, send data
+        const res = await supertest(server)
+            .post("/characters")
+            .send({ name: "" })
+        // make assertions
+        // correct status code?
+        expect(res.statusCode).toBe(400)
+    })
+
+    // create character - bad request (no data)
+    it("POST /characters", async () => {
+        // post request to /characters path with supertest, send data
+        const res = await supertest(server)
+            .post("/characters")
+            .send({})
+        // make assertions
+        // correct status code?
+        expect(res.statusCode).toBe(400)
+    })
+})
 
 // update character
 

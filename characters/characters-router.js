@@ -35,6 +35,11 @@ router.get("/:id", async (req, res, next) => {
 // POST /characters - create character
 router.post("/", async (req, res, next) => {
     try {
+        if (!req.body.name) {
+            return res.status(400).json({
+                message: "Please provide character name"
+            })
+        }
         const characterData = { name: req.body.name }
         const newCharacter = await Characters.insert(characterData)
         res.status(201).json(newCharacter)
