@@ -50,14 +50,26 @@ describe("characters integrations tests", () => {
     it("GET /characters/:id", async () => {
         // get request to /characters/:id path with supertest
         const res = await supertest(server).get("/characters/8")
-        console.log(res.body)
         // make assertions
         // correct status code?
         expect(res.statusCode).toBe(404)
     })
-})
 
-// create character
+    // create character
+    it("POST /characters", async () => {
+        // post request to /characters path with supertest, send data
+        const res = await supertest(server)
+            .post("/characters")
+            .send({ name: "faramir" })
+        // make assertions
+        // correct status code?
+        expect(res.statusCode).toBe(201)
+        // correct data type?
+        expect(res.type).toBe("application/json")
+        // correct data?
+        expect(res.body.name).toBe("faramir")
+    })
+})
 
 // create character - bad request (no data)
 

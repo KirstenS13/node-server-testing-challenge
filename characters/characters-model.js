@@ -10,8 +10,14 @@ function findById(id) { // putting first() makes it so that only one result is r
     return db("characters").where({ id }).first()
 }
 
+async function insert(data) {
+    const [id] = await db("characters").insert(data)
+    return findById(id)
+}
+
 // export helper methods
 module.exports = {
     find,
-    findById
+    findById,
+    insert
 }
