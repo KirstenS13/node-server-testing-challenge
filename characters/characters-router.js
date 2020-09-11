@@ -48,7 +48,16 @@ router.post("/", async (req, res, next) => {
     }
 })
 
-// PUT /characters/:id - update character
+// DELETE /characters/:id - delete character
+router.delete("/:id", async (req, res, next) => {
+    try {
+        const response = await Characters.remove(req.params.id)
+        console.log(response)
+        res.status(204).end()
+    } catch (err) {
+        next(err)
+    }
+})
 
 // export router
 module.exports = router

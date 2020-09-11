@@ -15,9 +15,14 @@ async function insert(data) {
     return findById(id)
 }
 
+function remove(id) {
+    return db("characters").where({ id }).del()
+}
+
 // export helper methods
 module.exports = {
     find,
     findById,
-    insert
+    insert,
+    remove
 }

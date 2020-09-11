@@ -91,8 +91,15 @@ describe("characters integrations tests", () => {
         // correct status code?
         expect(res.statusCode).toBe(400)
     })
+
+    // delete character
+    it("GET /characters/:id", async () => {
+        // get request to /characters/:id path with supertest
+        const res = await supertest(server).del("/characters/5")
+        // make assertions
+        // correct status code?
+        expect(res.statusCode).toBe(204)
+    })
 })
 
-// update character
-
-// update character - bad request (no data)
+// delete character - not found
