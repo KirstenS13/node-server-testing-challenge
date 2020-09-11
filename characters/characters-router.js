@@ -18,6 +18,13 @@ router.get("/", async (req, res, next) => {
 })
 
 // GET /characters/:id - get character by id
+router.get("/:id", async (req, res, next) => {
+    try {
+        res.json(await Characters.findById(req.params.id))
+    } catch (err) {
+        next(err)
+    }
+})
 
 // POST /characters - create character
 
